@@ -1,0 +1,31 @@
+CREATE TABLE `projects` (
+  `Project_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Project_Title` varchar(50) NOT NULL,
+  `Project_Description` varchar(2000) NOT NULL,
+  `Project_Deadline` date NOT NULL,
+  `User_ID` int(11) NOT NULL,
+  PRIMARY KEY (`Project_ID`),
+  KEY `F#1_idx` (`User_ID`),
+  CONSTRAINT `Foreign_key_1` FOREIGN KEY (`User_ID`) REFERENCES `users` (`User_ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `tasks` (
+  `Task_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Task_Title` varchar(50) NOT NULL,
+  `Task_Description` varchar(2000) NOT NULL,
+  `Task_Priority` int(11) NOT NULL,
+  `Task_Deadline` date NOT NULL,
+  `Task_Status` int(11) NOT NULL,
+  `Project_ID` int(11) NOT NULL,
+  PRIMARY KEY (`Task_ID`),
+  KEY `Foreign_key_1_idx` (`Project_ID`),
+  CONSTRAINT `Foreign_key_2` FOREIGN KEY (`Project_ID`) REFERENCES `projects` (`Project_ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `users` (
+  `User_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `HashIdentifiter` int(11) NOT NULL,
+  PRIMARY KEY (`User_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
